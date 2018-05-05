@@ -30,10 +30,12 @@ html, body, #app {
 body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   font-size: 14px;
-  -webkit-font-smoothing: antialiased;
+   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;  
   background-color: #eee;
 }
+
+
 a {
   text-decoration: none;
   color: #444;
@@ -53,8 +55,9 @@ ul, li{
   cursor: pointer;
   display: inline-block;
 }
+
 #app {
   display: flex;
   align-items: stretch;
- }
+}
 </style>
