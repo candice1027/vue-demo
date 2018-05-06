@@ -31,6 +31,11 @@
 </template>
 
 <script>
+import request from '@/helpers/request'
+request ('/auth/register','POST',{username: 'csfdsfs',password:'2233333'}).then(data=>{
+    console.log(data)
+})
+
     export default {
         name:'login',
         data() {
