@@ -5,20 +5,24 @@
              <div class="modal-container">
                  <div class="main"></div>
                  <div class="form">
-                     <h3 @click="showRegister">创建账户</h3>
-                     <div v-show="isShowRegister" class="register">
-                         <input  v-model="register.username" type="text"  placeholder="用户名">
-                         <input v-model="register.password" type="password" placeholder="密码">
-                         <p :class="{error:register.error}">{{register.notice}}</p>
-                         <div class="button" @click="getRegister">创建账号</div>
-                     </div>
+                    <h3 @click="showRegister">创建账户</h3>
+                    <transition name="slide">
+                        <div :class="{show:isShowRegister}" v-show="isShowRegister" class="register">
+                            <input  v-model="register.username" type="text"  placeholder="用户名">
+                            <input v-model="register.password" type="password" placeholder="密码">
+                            <p :class="{error:register.error}">{{register.notice}}</p>
+                            <div class="button" @click="getRegister">创建账号</div>
+                        </div>
+                    </transition>
                      <h3 @click="showLogin">登录</h3>
-                     <div v-show="isShowLogin" class="login">
-                        <input v-model="login.username" type="text"  placeholder="用户名">
-                        <input v-model="login.password" type="password"  placeholder="密码">
-                        <p :class="{error:login.error}">{{login.notice}}</p>
-                        <div class="button" @click="getLogin">登录</div> 
-                     </div>
+                    <transition name="slide">
+                        <div :class="{show: isShowLogin}" v-show="isShowLogin" class="login">
+                            <input v-model="login.username" type="text"  placeholder="用户名">
+                            <input v-model="login.password" type="password"  placeholder="密码">
+                            <p :class="{error:login.error}">{{login.notice}}</p>
+                            <div class="button" @click="getLogin">登录</div> 
+                        </div>
+                    </transition>
                  </div>
              </div>
          </div>
@@ -126,8 +130,10 @@
 .form {
     width: 270px;
     border-left: 1px solid #ccc;
+    overflow: hidden;
     h3 {
         padding: 10px 20px;
+        margin-top: -1px;
         font-weight: normal;
         font-size: 16px;
         border-top: 1px solid #eee;
@@ -149,8 +155,15 @@
     cursor: pointer;
 }
 .login,.register {
-    padding: 10px 20px;
+    padding: 0px 20px;
     border-top: 1px solid #eee;
+    height: 0;
+    overflow: hidden;
+    transition: height .3s;
+
+    &.show {
+        height: 193px;
+    }
     input {
        display: block;
         width: 100%;
