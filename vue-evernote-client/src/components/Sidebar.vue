@@ -11,7 +11,7 @@
             <router-link to="/trash/2" title="回收站">
                 <i class="iconfont icon-trash"></i>
             </router-link>
-            <div class="logout">
+            <div class="logout" @click="logout">
                 <i class="iconfont icon-logout"></i>
             </div>
         </div>
@@ -21,9 +21,17 @@
 
 <script>
 import avatar from "@/components/Avatar"
+import request from '@/helpers/request'
 export default {
     components: {
         avatar
+    },
+    methods:{
+       logout() {
+           request('/auth/logout').then((data)=> {
+               console.log(data)
+           })
+        }
     }
 }
 </script>

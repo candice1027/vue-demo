@@ -1,31 +1,34 @@
 import axios from 'axios'
+import baseURLConfig from './config-baseURL'
 
-axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencode'
-axios.defaults.baseURL = 'http://note-server.hunger-valley.com'
-axios.defaults.withCredentials = true //表示是否使用跨域请求
-export default function request(url, type="GET", data ={}) {
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.baseURL = baseURLConfig.baseURL;
+//axios.defaults.withCredentials = true;//代表允许浏览器发送cookie
+
+export default function request (url, type="GET",data={}) {
     return new Promise((resolve,reject) => {
-       let option = {
-           url,
-           method: type,
-           validateStatus(status) {
-               return (status >=200 && status < 300) || status ===400
-           }
-       }
-       if (type.toLowerCase() === 'get') {
-           option.params = data
-       } else {
-           option.data = data
-       }
+        let option = {
+            url,
+            method: type,
+            validateStatus: function (status) {
+                return (status >=200 && status < 300) || status === 400
+            }
+        }
+    
+        if (type.toLowerCase() === 'get') {
+            option.params = data
+        } else {
+            option.data = data
+        } 
 
-       axios(option).then(res => {
-           if (res.status === 200) {
+        axios(option).then(res => {
+            if (res.status === 200) {
                resolve(res.data)
-           } else {
+            } else {
                reject(res.data)
-           }
-       }).catch( err => {
-           reject({msg: '网络异常'})
-       })
-    })
+            }
+        }).catch(err => {
+            reject({msg: '网络异常'})
+        })
+    })   
 }

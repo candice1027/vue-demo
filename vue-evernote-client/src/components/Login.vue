@@ -31,10 +31,11 @@
 </template>
 
 <script>
-import request from '@/helpers/request'
-request ('/auth/register','POST',{username: 'csfdsfs',password:'2233333'}).then(data=>{
-    console.log(data)
-})
+//import request from '@/helpers/request'
+import auth from '@/apis/auth'
+// request ('/auth').then(data=>{
+//     console.log(data)
+// })
 
     export default {
         name:'login',
@@ -78,7 +79,15 @@ request ('/auth/register','POST',{username: 'csfdsfs',password:'2233333'}).then(
                 }
                 this.register.error = true;
                 this.register.notice = '';
-                console.log('1122')
+                // request ('/auth/register','POST',{username: this.register.username,password: this.register.password}).then(data=>{
+                //     console.log(data)
+                // })
+                auth.register(
+                    {username: this.register.username, password: this.register.password}
+                    ).then(res=> {
+                    console.log(res)
+                })
+                
             },
             getLogin() {
                 if (!/^[\w\u4e00-\u9fa5]{3,15}$/.test(this.login.username)){
@@ -93,8 +102,14 @@ request ('/auth/register','POST',{username: 'csfdsfs',password:'2233333'}).then(
                 }
                 this.login.error = true;
                 this.login.notice = '';
-                console.log('3333')
-
+                auth.login(
+                    {username: this.register.username, password: this.register.password}
+                    ).then(res=> {
+                    console.log(res)
+                })
+                // request ('/auth/login','POST',{username: this.login.username,password: this.login.password}).then(data=>{
+                //     console.log(data)
+                // })
             }
         }
     }
