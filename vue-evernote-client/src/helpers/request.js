@@ -3,7 +3,7 @@ import baseURLConfig from './config-baseURL'
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 axios.defaults.baseURL = baseURLConfig.baseURL;
-//axios.defaults.withCredentials = true;//代表允许浏览器发送cookie
+axios.defaults.withCredentials = true;//代表允许浏览器发送cookie
 
 export default function request (url, type="GET",data={}) {
     return new Promise((resolve,reject) => {

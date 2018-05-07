@@ -33,10 +33,12 @@
 <script>
 //import request from '@/helpers/request'
 import auth from '@/apis/auth'
-// request ('/auth').then(data=>{
-//     console.log(data)
-// })
+//判断有没有登录
 
+auth.getInfo(
+    ).then(res=> {
+    console.log(res)
+})
     export default {
         name:'login',
         data() {
@@ -46,13 +48,13 @@ import auth from '@/apis/auth'
                 register: {
                     username: '',
                     password: '',
-                    notice: '请输入用户名和密码',
+                    notice: '',
                     error: false
                 },
                 login: {
                     username: '',
                     password: '',
-                    notice: '请输入用户名和密码',
+                    notice: '',
                     error: false
                 }
             }
@@ -77,15 +79,21 @@ import auth from '@/apis/auth'
                     this.register.notice = '密码长度为6~16个字符';
                     return 
                 }
-                this.register.error = true;
-                this.register.notice = '';
+                
+                
                 // request ('/auth/register','POST',{username: this.register.username,password: this.register.password}).then(data=>{
                 //     console.log(data)
                 // })
                 auth.register(
                     {username: this.register.username, password: this.register.password}
                     ).then(res=> {
-                    console.log(res)
+                        this.register.error = false;
+                        this.register.notice = '';
+                        this.$router.push({path: 'notebook'})
+                }).catch(err => {
+                        this.register.error = true;
+                        this.register.notice = err.msg;
+                    console.log(err)
                 })
                 
             },
@@ -100,12 +108,16 @@ import auth from '@/apis/auth'
                     this.login.notice = '请输入正确的密码';
                     return 
                 }
-                this.login.error = true;
-                this.login.notice = '';
+                
                 auth.login(
-                    {username: this.register.username, password: this.register.password}
+                    {username: this.login.username, password: this.login.password}
                     ).then(res=> {
-                    console.log(res)
+                        this.login.error = false;
+                        this.login.notice = '';
+                        this.$router.push({path: 'notebook'})    
+                }).catch(err => {
+                    this.login.notice = err.msg
+                    this.login.error = true
                 })
                 // request ('/auth/login','POST',{username: this.login.username,password: this.login.password}).then(data=>{
                 //     console.log(data)

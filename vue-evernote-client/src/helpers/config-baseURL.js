@@ -1,4 +1,4 @@
 
     module.exports = {
-        baseURL : 'http:/localhost:8080'
+        baseURL : 'http://note-server.hunger-valley.com'
     }
