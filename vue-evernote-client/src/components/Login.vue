@@ -33,6 +33,7 @@
 <script>
 //import request from '@/helpers/request'
 import auth from '@/apis/auth'
+import bus from '@/helpers/bus'
 //判断有没有登录
 
 auth.getInfo(
@@ -80,16 +81,13 @@ auth.getInfo(
                     return 
                 }
                 
-                
-                // request ('/auth/register','POST',{username: this.register.username,password: this.register.password}).then(data=>{
-                //     console.log(data)
-                // })
                 auth.register(
                     {username: this.register.username, password: this.register.password}
                     ).then(res=> {
                         this.register.error = false;
                         this.register.notice = '';
-                        this.$router.push({path: 'notebook'})
+                        this.$router.push({path: 'notebook'});
+                        bus.$emit('userinfo',{username: this.register.username})
                 }).catch(err => {
                         this.register.error = true;
                         this.register.notice = err.msg;
@@ -114,7 +112,9 @@ auth.getInfo(
                     ).then(res=> {
                         this.login.error = false;
                         this.login.notice = '';
-                        this.$router.push({path: 'notebook'})    
+                        this.$router.push({path: 'notebook'});
+                        //登录成功之后触发更改用户名的事件
+                        bus.$emit('userinfo',{username: this.login.username})
                 }).catch(err => {
                     this.login.notice = err.msg
                     this.login.error = true

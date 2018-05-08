@@ -22,6 +22,7 @@
 <script>
 import avatar from "@/components/Avatar"
 import auth from '@/apis/auth'
+import bus from '@/helpers/bus'
 export default {
     components: {
         avatar
@@ -29,7 +30,8 @@ export default {
     methods:{
        logout() {
            auth.logout().then(() => {
-               this.$router.push({path: 'login'})
+               this.$router.push({path: 'login'});
+               bus.$emit('userinfo',{username: '未登录'})
            }).catch(err => {
 
            })

@@ -16,12 +16,24 @@
   
 </template>
 <script>
+import auth from '@/apis/auth'
+
     export default {
         name: 'NoteBookList',
         data () {
             return {
                 msg: '笔记本列表'
             }
+        },
+        created() {
+            auth.getInfo().then(res => {
+                console.log('333')
+                console.log(res)
+                if (!res.isLogin) {
+                    this.$router.push( {path : '/login'})
+                }
+            })
+            
         }
     
     }

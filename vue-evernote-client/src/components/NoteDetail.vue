@@ -5,12 +5,22 @@
 </template>
 
 <script>
+import auth from '@/apis/auth'
     export default {
         name: 'NoteDetail',
         data() {
             return {
                 msg: 'This is notedetail'
             }
+        },
+        created() {
+            auth.getInfo().then( res => {
+                console.log('333')
+                console.log(res)
+                if (!res.isLogin) {
+                    this.$router.push({ path: '/login'})
+                }
+            })
         }
     }
 </script>

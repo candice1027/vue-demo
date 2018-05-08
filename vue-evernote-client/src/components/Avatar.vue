@@ -3,27 +3,33 @@
 </template>
 
 <script>
-import auth from'@/apis/auth'
+import auth from '@/apis/auth'
+import bus from '@/helpers/bus'
 export default {
-  data () {
-      return {
-          username: '未登录'
-      }
-  },
-  created() {
-      //声明周期函数
-      auth.getInfo().then(res => {
-          if( res.isLogin) {
-              this.username = res.data.username;
-          }
-      })
-  },
-  computed: {
-        slug() {
-            return this.username.charAt(0)
-        }
-      
-  }
+    data () {
+            return {
+                username: '未登录'
+            }
+    },
+    created() {
+        //监听用户名更新
+            bus.$on('userinfo', user => {
+                this.username = user.username
+
+            }),
+        //声明周期函数
+            auth.getInfo().then(res => {
+                if( res.isLogin) {
+                    this.username = res.data.username;
+                }
+            })
+    },
+    computed: {
+            slug() {
+                return this.username.charAt(0)
+            }
+        
+    }
 }
 </script>
 
