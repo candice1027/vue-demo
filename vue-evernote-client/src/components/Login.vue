@@ -86,7 +86,7 @@ auth.getInfo(
                     ).then(res=> {
                         this.register.error = false;
                         this.register.notice = '';
-                        this.$router.push({path: 'notebook'});
+                        this.$router.push({path: 'notebooks'});
                         bus.$emit('userinfo',{username: this.register.username})
                 }).catch(err => {
                         this.register.error = true;
@@ -112,7 +112,7 @@ auth.getInfo(
                     ).then(res=> {
                         this.login.error = false;
                         this.login.notice = '';
-                        this.$router.push({path: 'notebook'});
+                        this.$router.push({path: 'notebooks'});
                         //登录成功之后触发更改用户名的事件
                         bus.$emit('userinfo',{username: this.login.username})
                 }).catch(err => {
