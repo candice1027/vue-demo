@@ -15,8 +15,6 @@ import auth from '@/apis/auth'
         },
         created() {
             auth.getInfo().then( res => {
-                console.log('333')
-                console.log(res)
                 if (!res.isLogin) {
                     this.$router.push({ path: '/login'})
                 }

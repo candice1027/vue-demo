@@ -17,6 +17,7 @@
 </template>
 <script>
 import auth from '@/apis/auth'
+//import Router from '@/router/index'
 
     export default {
         name: 'NoteBookList',
@@ -26,11 +27,12 @@ import auth from '@/apis/auth'
             }
         },
         created() {
+            
+            //console.log(Router === this.$router) 返回的是true
+            window.detail = this;
             auth.getInfo().then(res => {
-                console.log('333')
-                console.log(res)
                 if (!res.isLogin) {
-                    this.$router.push( {path : '/login'})
+                    this.$router.push( {path : '/login'})//这个地方也可以直接把router引进来import Router from '@/router/index' 然后将this.$router.push( {path : '/login'}) 改成Router.push( {path : '/login'}) 两者是没有区别的
                 }
             })
             
