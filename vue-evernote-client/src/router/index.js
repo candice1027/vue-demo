@@ -4,11 +4,16 @@ import Login from '@/components/Login'
 import NoteBooks from '@/components/NoteBookList'
 import Note from '@/components/NoteDetail'
 import Trash from '@/components/TrashDetail'
+import Hello from '@/components/helloword'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/',
+      component: Hello
+    },
     {
       path: '/login',
       component: Login

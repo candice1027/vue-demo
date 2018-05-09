@@ -24,12 +24,15 @@
     width: 900px;
     margin: 0 auto;
     padding: 20px 0 0 0;
+    border-radius: 5px;
     .note-list-title{
         font-size: 16px;
         margin-bottom: 10px;
     }
     .note-list{
         background-color: #fff;
+        li {border-bottom: 1px solid #ddd;}
+        li:nth-last-child(1){border-bottom: none;}
         .note-item{
             padding: 15px;
             display: flex;
