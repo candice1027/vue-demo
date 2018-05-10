@@ -1,16 +1,29 @@
 <template>
-  <div id="detail">
-      <h1>{{msg}}: {{ $route.params.noteId }}</h1>
+  <div class="note-detail" id="detail">
+      <!-- <h1>{{ $route.query.notebookId }}</h1> -->
+      <noteSideBar></noteSideBar>
+      <div class="text-main"></div>
   </div>
 </template>
 
 <script>
+import noteSideBar from '@/components/noteSideBar'
 import auth from '@/apis/auth'
     export default {
         name: 'NoteDetail',
+        components:{
+            noteSideBar
+        },
         data() {
             return {
-                msg: 'This is notedetail'
+                currNote: {
+                    title: '第一个笔记',
+                    content: '这里是内容',
+                    createdAtFriendly: '3天前',
+                    updateAtFriendly: '2天前',
+                    statusText: '未更新'
+
+                }
             }
         },
         created() {
@@ -24,10 +37,7 @@ import auth from '@/apis/auth'
 </script>
 
 <style scoped>
-    h1 {
-        color: yellow;
-    }
-
+.text-main {background-color: #fff;}
 </style>
 
 

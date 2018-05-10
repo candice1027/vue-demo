@@ -8,7 +8,7 @@
 			<p class="note-list-title">笔记本列表({{noteBooks.length}})</p>
 			<ul class="note-list" >
 				<li v-for="notebook in noteBooks" :key="notebook.id">
-					<router-link to="/note/1" class="note-item" >
+					<router-link :to="`/note?notebookId=${notebook.id}`" class="note-item" >
 						<div class="note-name">
 							<i class="iconfont icon-note"></i>
 							<span>{{notebook.title}}({{notebook.noteCounts}})</span>
@@ -63,16 +63,8 @@ import Notebooks from '@/apis/notebooks'
                 }).then(({ value }) => {
                         return Notebooks.addNoteBook({title: value})
                     }).then((res) => {
-                        this.$message({
-                            type: 'success',
-                            message: res.msg
-                        })
+                        this.$message.success(res.msg)
                          this.noteBooks.unshift(res.data)
-                    }).catch((res)=> {
-                        this.$message({
-                            type: 'error',
-                            message: res.msg
-                        })
                     })
             },
             deleteNote(note) {
@@ -81,23 +73,11 @@ import Notebooks from '@/apis/notebooks'
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    // this.$message({
-                    //     type: 'success',
-                    //     message: '删除成功!'
-                    // });
                     return Notebooks.deleteNotebook(note.id)
                 }).then((res)=> {
                     this.noteBooks.splice(this.noteBooks.indexOf(note),1);//这里注意splice的用法，如果这里的note没有在noteBooks里面的话，indexOf(note)就会得到 -1,那么使用splice(-1,1)删除的就是数组的最后一项
-                    this.$message({
-                        type: 'success',
-                        message: '删除成功!'
-                    });
-                }).catch((err) => {
-                    this.$message({
-                        type: 'info',
-                        message: err.msg || '已取消删除'
-                    });          
-                });   
+                    this.$message.success('删除成功')
+                }) 
             },
             editNote(note) { 
                 let title = '';
@@ -111,17 +91,9 @@ import Notebooks from '@/apis/notebooks'
                         title = value;
                         return Notebooks.updateNotebook(note.id,{title})
                     }).then((res) => {
-                        this.$message({
-                            type: 'success',
-                            message: res.msg
-                        })
+                        this.$message.success(res.msg)
                         note.title = title;
-                    }).catch((res)=> {
-                        this.$message({
-                            type: 'error',
-                            message: res.msg ||'取消输入'
-                        })
-                    })   
+                    }) 
             }
         }
     }

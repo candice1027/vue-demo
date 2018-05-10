@@ -1,0 +1,52 @@
+.main {
+    width: 300px;
+    height: 100%;
+    border-right: 1px solid #ccc;
+    .top-tab {
+        width: 100%;
+        padding: 20px 0;
+        text-align: center;
+        border-bottom: 1px solid #ccc;
+        position: relative;
+    }
+    .add-note {
+        position: absolute;
+        padding: 3px 5px;
+        font-size: 12px;
+        background-color: #fff;
+        border-radius: 5px;
+        color: #999;
+        right: 20px;
+        top:18px;
+    }
+    .menu {
+        display: flex;
+        div {
+            color: #666;
+            font-size: 12px;
+            padding: 2px 10px;
+            flex: 1;
+            border-right: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            &:nth-last-child(1) {
+                border-right: none;
+            }
+        }
+        
+    }
+    .note-list li{
+        font-size: 12px;
+        width: 100%;
+        padding: 7px 11px;
+        .note-item {
+            display: flex;
+            div{
+                color: #999;
+                flex:1;
+            }
+        }   
+    }
+    .el-dropdown {
+        cursor: pointer;
+    }
+}
