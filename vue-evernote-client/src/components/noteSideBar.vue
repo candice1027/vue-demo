@@ -40,6 +40,7 @@ export default {
             currNoteBook:{}
         }
     },
+    props: ['currNote'],
     created(){
          //Note.addNoteBook({notebookId: 95},{title: '这是hello的第一个笔记',content: '符合设计的开发很多事'})
         //获取所有笔记本
@@ -49,6 +50,7 @@ export default {
             return Note.getAll({'notebookId': this.currNoteBook.id})
         }).then(res => {
             this.notes = res.data; 
+            this.$emit('update:notes',this.notes);//触发告知父组件NoteDetail笔记列表已更新，且列表数据也传过去了
         })   
     },
     methods: {
@@ -61,6 +63,7 @@ export default {
             }) 
             Note.getAll({'notebookId': note}).then(res => {
                 this.notes = res.data; 
+                this.$emit('update:notes',this.notes);//触发告知父组件NoteDetail笔记列表已更新，且列表数据也传过去了
             });  
         }
     }
